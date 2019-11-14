@@ -988,7 +988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.14, z: 0}
+  m_LocalPosition: {x: 0, y: 1.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 946912832}
@@ -1373,10 +1373,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555064081}
-  - component: {fileID: 1555064080}
-  - component: {fileID: 1555064079}
   - component: {fileID: 1555064082}
   - component: {fileID: 1555064083}
+  - component: {fileID: 1555064080}
+  - component: {fileID: 1555064079}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1384,7 +1384,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &1555064079
+--- !u!136 &1555064079
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555064078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1555064080
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1400,20 +1414,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &1555064080
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555064078}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1555064081
 Transform:
   m_ObjectHideFlags: 0
@@ -1422,7 +1422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555064078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: -5.97}
+  m_LocalPosition: {x: 0, y: 0.503, z: -5.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1454,10 +1454,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0390b3248c76eef4eb52b1a88ae1f94e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 1555064079}
+  body: {fileID: 1555064080}
   moveSpeed: 1
-  rotateSpeed: 50
-  cameraLock: 20
+  rotateSpeed: 5
+  minY: -45
+  maxY: 45
 --- !u!1 &2064104857
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,11 +7,16 @@ public class Player_Movement : MonoBehaviour
     public Rigidbody body;
     public float moveSpeed;
     public float rotateSpeed;
-    public int cameraLock;
+    public float minY;
+    public float maxY;
+    private float rotationY;
+    private Transform cameraTransform;
 
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        cameraTransform = Camera.main.gameObject.transform;
+
     }
 
     void FixedUpdate()
@@ -47,19 +52,11 @@ public class Player_Movement : MonoBehaviour
             }
         }
 
-        Vector3 lookTarget = new Vector3(0, 0, 0);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
+        rotationY = Mathf.Clamp(rotationY, minY, maxY);
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            lookTarget = hit.point;
-        }
-
-        Vector3 lookDelta = (hit.point - transform.position);
-        Quaternion targetRot = Quaternion.LookRotation(lookDelta);
-        float rotSpeed = rotateSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotSpeed);
+        cameraTransform.localEulerAngles = new Vector3(-rotationY, 0, 0);
     }
 }
