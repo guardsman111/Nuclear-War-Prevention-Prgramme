@@ -27,14 +27,14 @@ public class Player_Movement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                if (Input.GetKey(KeyCode.D) & !Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {
                         body.velocity += (transform.right * moveSpeed) + (transform.forward * moveSpeed);
                     }
                 }
-                else if (Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {
@@ -48,14 +48,14 @@ public class Player_Movement : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                if (Input.GetKey(KeyCode.D) & !Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {
                         body.velocity += (transform.right * moveSpeed) + (transform.forward * -moveSpeed);
                     }
                 }
-                else if (Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {

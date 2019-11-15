@@ -28,6 +28,7 @@ public class Static_Interaction_Script : MonoBehaviour
             {
                 Player.GetComponent<Player_Movement>().SetInteracting(false);
                 uiText.GetComponent<Text>().text = "PRESS F TO INTERACT";
+                screenController.GetComponent<Screen_Controller_Script>().StopInteraction();
                 screenController.SetActive(false);
             }
             else
@@ -46,6 +47,11 @@ public class Static_Interaction_Script : MonoBehaviour
                 {
                     screenController.GetComponent<Screen_Controller_Script>().SetBinary();
                 }
+                if (gameObject.tag == "Letter")
+                {
+                    screenController.GetComponent<Screen_Controller_Script>().SetLetter();
+                }
+                screenController.GetComponent<Screen_Controller_Script>().SetDigitsActive(0, true);
             }
         }
     }
