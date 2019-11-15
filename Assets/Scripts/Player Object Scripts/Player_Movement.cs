@@ -6,57 +6,100 @@ public class Player_Movement : MonoBehaviour
 {
     public Rigidbody body;
     public float moveSpeed;
+    public float maxSpeed;
     public float rotateSpeed;
     public float minY;
     public float maxY;
     private float rotationY;
     private Transform cameraTransform;
 
+    private bool interacting;
+
     private void Start()
     {
         body = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.gameObject.transform;
-
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (!interacting)
         {
-            if (body.velocity.magnitude <= 2)
+            if (Input.GetKey(KeyCode.W))
             {
-                body.velocity += new Vector3(0, 0, moveSpeed);
+                if (Input.GetKey(KeyCode.D) & !Input.GetKey(KeyCode.A))
+                {
+                    if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += (transform.right * moveSpeed) + (transform.forward * moveSpeed);
+                    }
+                }
+                else if (Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D))
+                {
+                    if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += (transform.right * -moveSpeed) + (transform.forward * moveSpeed);
+                    }
+                }
+                else if (body.velocity.magnitude <= maxSpeed)
+                {
+                    body.velocity += transform.forward * moveSpeed;
+                }
             }
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            if (body.velocity.magnitude <= 2)
+            else if (Input.GetKey(KeyCode.S))
             {
-                body.velocity -= new Vector3(0, 0, moveSpeed);
+                if (Input.GetKey(KeyCode.D) & !Input.GetKey(KeyCode.A))
+                {
+                    if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += (transform.right * moveSpeed) + (transform.forward * -moveSpeed);
+                    }
+                }
+                else if (Input.GetKey(KeyCode.A) & !Input.GetKey(KeyCode.D))
+                {
+                    if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += (transform.right * -moveSpeed) + (transform.forward * -moveSpeed);
+                    }
+                }
+                else if (body.velocity.magnitude <= maxSpeed)
+                {
+                    body.velocity += transform.forward * -moveSpeed;
+                }
             }
-        }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (body.velocity.magnitude <= 2)
+            if (Input.GetKey(KeyCode.D))
             {
-                body.velocity += new Vector3(moveSpeed, 0, 0f);
+                if (body.velocity.magnitude <= maxSpeed)
+                {
+                    body.velocity += transform.right * moveSpeed;
+                }
             }
-        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (body.velocity.magnitude <= 2)
+            if (Input.GetKey(KeyCode.A))
             {
-                body.velocity -= new Vector3(moveSpeed, 0, 0.1f);
+                if (body.velocity.magnitude <= maxSpeed)
+                {
+                    body.velocity += transform.right * -moveSpeed;
+                }
             }
+
+            transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
+
+            rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
+            rotationY = Mathf.Clamp(rotationY, minY, maxY);
+
+            cameraTransform.localEulerAngles = new Vector3(-rotationY, 0, 0);
         }
+    }
 
-        transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
+    public void SetInteracting(bool newV)
+    {
+        interacting = newV;
+    }
 
-        rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
-        rotationY = Mathf.Clamp(rotationY, minY, maxY);
-
-        cameraTransform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+    public bool GetInteracting()
+    {
+        return interacting;
     }
 }
