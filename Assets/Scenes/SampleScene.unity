@@ -584,6 +584,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 342606133}
   ID: 2
+  binaryValues:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  letterValues:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  - T
+  - U
+  - V
+  - W
+  - X
+  - Y
+  - Z
   digitValues:
   - 0
   - 1
@@ -946,6 +984,7 @@ GameObject:
   - component: {fileID: 711664471}
   - component: {fileID: 711664476}
   - component: {fileID: 711664475}
+  - component: {fileID: 711664477}
   m_Layer: 0
   m_Name: Letter Comp
   m_TagString: Letter
@@ -1056,6 +1095,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5932832, y: 0.6524191, z: 1.288435}
   m_Center: {x: -0.3567207, y: 0.17379045, z: -0.01402545}
+--- !u!114 &711664477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711664470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842d7915b5cf72a47b64a75489f786e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: letter
+  code:
+  - W
+  - A
+  - E
+  - H
+  lastCodeTried: 00000000000000000000000000000000
 --- !u!1 &781614631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1421,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1019946260}
   ID: 3
+  binaryValues:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  letterValues:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  - T
+  - U
+  - V
+  - W
+  - X
+  - Y
+  - Z
   digitValues:
   - 0
   - 1
@@ -1909,6 +2005,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1540841927}
   ID: 0
+  binaryValues:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  letterValues:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  - T
+  - U
+  - V
+  - W
+  - X
+  - Y
+  - Z
   digitValues:
   - 0
   - 1
@@ -1931,6 +2065,7 @@ GameObject:
   - component: {fileID: 1555064081}
   - component: {fileID: 1555064082}
   - component: {fileID: 1555064083}
+  - component: {fileID: 1555064084}
   - component: {fileID: 1555064080}
   - component: {fileID: 1555064079}
   m_Layer: 0
@@ -2016,6 +2151,18 @@ MonoBehaviour:
   rotateSpeed: 5
   minY: -45
   maxY: 45
+--- !u!114 &1555064084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555064078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5ede0a7cc30a84d9575cb99c5937f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562071390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,6 +2281,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1594219805}
   ID: 1
+  binaryValues:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  letterValues:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+  - K
+  - L
+  - M
+  - N
+  - O
+  - P
+  - Q
+  - R
+  - S
+  - T
+  - U
+  - V
+  - W
+  - X
+  - Y
+  - Z
   digitValues:
   - 0
   - 1
@@ -2241,6 +2426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   binaryComputer: {fileID: 2064104857}
   letterComputer: {fileID: 711664470}
+  playerConstants: {fileID: 1555064084}
   screenDigits:
   - {fileID: 1540841929}
   - {fileID: 1594219804}
@@ -2260,6 +2446,7 @@ GameObject:
   - component: {fileID: 2064104858}
   - component: {fileID: 2064104863}
   - component: {fileID: 2064104862}
+  - component: {fileID: 2064104864}
   m_Layer: 0
   m_Name: Binary Comp
   m_TagString: Binary
@@ -2370,6 +2557,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5932832, y: 0.6524191, z: 1.288435}
   m_Center: {x: -0.3567207, y: 0.17379045, z: -0.01402545}
+--- !u!114 &2064104864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064104857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842d7915b5cf72a47b64a75489f786e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: binary
+  code:
+  - 4
+  - 2
+  - 8
+  - 7
+  lastCodeTried: 00000000000000000000000000000000
 --- !u!1 &2096003563
 GameObject:
   m_ObjectHideFlags: 0
