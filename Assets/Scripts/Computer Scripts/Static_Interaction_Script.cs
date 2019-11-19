@@ -13,6 +13,7 @@ public class Static_Interaction_Script : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         uiText.SetActive(true);
+        uiText.GetComponent<Text>().text = "PRESS F TO INTERACT";
     }
 
     public void OnTriggerExit(Collider other)

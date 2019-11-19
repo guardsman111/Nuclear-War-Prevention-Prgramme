@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Screen_Controller_Script : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Screen_Controller_Script : MonoBehaviour
     public GameObject binaryComputer;
     public GameObject letterComputer;
     public Player_Constants_Script playerConstants;
+    public GameObject uiText;
 
     private int arrayValue = 0;
 
@@ -68,13 +70,20 @@ public class Screen_Controller_Script : MonoBehaviour
                 if (currentComputer.GetComponent<Computer_Script>().name == "binary")
                 {
                     playerConstants.SetKey("binary", true);
+                    uiText.GetComponent<Text>().text = "GOT KEY!";
                     Debug.Log("Get Key");
                 }
                 if (currentComputer.GetComponent<Computer_Script>().name == "letter")
                 {
                     playerConstants.SetKey("letter", true);
+                    uiText.GetComponent<Text>().text = "GOT KEY!";
                     Debug.Log("Get Key");
                 }
+            }
+            else
+            {
+                uiText.GetComponent<Text>().text = "INCORRECT CODE";
+                Invoke("ResetText", 0.5f);
             }
         }
     }
@@ -107,5 +116,10 @@ public class Screen_Controller_Script : MonoBehaviour
         updatedComputerType = false;
         screenDigits[arrayValue].SetInteracting(false);
         currentComputer.GetComponent<Computer_Script>().SetLastCode(screenDigits[0].GetArrayValue(), screenDigits[1].GetArrayValue(), screenDigits[2].GetArrayValue(), screenDigits[3].GetArrayValue());
+    }
+
+    public void ResetText()
+    {
+        uiText.GetComponent<Text>().text = "PRESS F TO STOP INTERACTING";
     }
 }
