@@ -14,11 +14,13 @@ public class Player_Movement : MonoBehaviour
     private Transform cameraTransform;
 
     private bool interacting;
+    private AudioSource speaker;
 
     private void Start()
     {
         body = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.gameObject.transform;
+        speaker = this.GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -90,6 +92,15 @@ public class Player_Movement : MonoBehaviour
             rotationY = Mathf.Clamp(rotationY, minY, maxY);
 
             cameraTransform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            if (body.velocity.magnitude > 0.5f && !speaker.isPlaying)
+            {
+                Debug.Log("Speaker Playing");
+                speaker.Play();
+            } 
+            else if (body.velocity.magnitude < 0.5f && speaker.isPlaying)
+            {
+                speaker.Stop();
+            }
         }
     }
 

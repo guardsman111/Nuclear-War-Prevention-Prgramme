@@ -11,11 +11,12 @@ public class Screen_Digit_Script : MonoBehaviour
     public string[] binaryValues;
     public string[] letterValues;
     public string[] digitValues;
+    public Screen_Controller_Script parent;
     private string currentValue;
     private int arrayValue;
 
     private bool interacting = false;
-
+    
     private void Start()
     {
         currentValue = digitValues[0];
@@ -38,6 +39,7 @@ public class Screen_Digit_Script : MonoBehaviour
                     arrayValue = 0;
                     currentValue = digitValues[arrayValue];
                 }
+                parent.PlayKeyUp();
             }
 
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
@@ -52,6 +54,7 @@ public class Screen_Digit_Script : MonoBehaviour
                     arrayValue = digitValues.Length - 1;
                     currentValue = digitValues[arrayValue];
                 }
+                parent.PlayKeyDown();
             }
             textBox.text = currentValue;
         }

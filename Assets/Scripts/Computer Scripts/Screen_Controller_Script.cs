@@ -11,6 +11,10 @@ public class Screen_Controller_Script : MonoBehaviour
     public Player_Constants_Script playerConstants;
     public GameObject uiText;
 
+    public AudioSource keySide;
+    public AudioSource keyUp;
+    public AudioSource keyDown;
+
     private int arrayValue = 0;
 
     public Screen_Digit_Script[] screenDigits;
@@ -42,6 +46,7 @@ public class Screen_Controller_Script : MonoBehaviour
                 arrayValue = screenDigits.Length - 1;
                 SetDigitsActive(arrayValue, true);
             }
+            keySide.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -58,6 +63,7 @@ public class Screen_Controller_Script : MonoBehaviour
                 arrayValue = 0;
                 SetDigitsActive(arrayValue, true);
             }
+            keySide.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -121,5 +127,15 @@ public class Screen_Controller_Script : MonoBehaviour
     public void ResetText()
     {
         uiText.GetComponent<Text>().text = "PRESS F TO STOP INTERACTING";
+    }
+
+    public void PlayKeyUp()
+    {
+        keyUp.Play();
+    }
+
+    public void PlayKeyDown()
+    {
+        keyDown.Play();
     }
 }
