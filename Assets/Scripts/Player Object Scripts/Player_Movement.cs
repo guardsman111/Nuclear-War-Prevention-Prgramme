@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -101,6 +102,16 @@ public class Player_Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.K))
             {
                 screen.ChangeVideo("cancel");
+            }
+
+            if (Input.GetKey(KeyCode.P))
+            {
+                SceneManager.LoadScene(0);
+            }
+
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
             }
 
             transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
