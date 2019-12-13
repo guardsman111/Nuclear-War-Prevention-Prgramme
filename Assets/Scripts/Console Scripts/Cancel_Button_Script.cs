@@ -8,6 +8,7 @@ public class Cancel_Button_Script : MonoBehaviour
     public Key_Slot_Script key1;
     public Key_Slot_Script key2;
     public GameObject uiText;
+    public Launch_Script screen;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -27,6 +28,7 @@ public class Cancel_Button_Script : MonoBehaviour
             if (key1.CheckKeysInserted() && key2.CheckKeysInserted())
             {
                 uiText.GetComponent<Text>().text = "LAUNCH CANCELLED!";
+                screen.ChangeVideo("cancel");
                 Debug.Log("You stopped the launch!");
             }
             else

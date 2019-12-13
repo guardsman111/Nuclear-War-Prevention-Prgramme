@@ -12,9 +12,14 @@ public class Player_Movement : MonoBehaviour
     public float maxY;
     private float rotationY;
     private Transform cameraTransform;
+    public Launch_Script screen;
+    public Camera_Shake_Script shaker;
 
     private bool interacting;
     private AudioSource speaker;
+
+    private bool launching = false;
+    public float shakeMagnitude;
 
     private void Start()
     {
@@ -86,15 +91,36 @@ public class Player_Movement : MonoBehaviour
                 }
             }
 
+            if (Input.GetKey(KeyCode.L))
+            {
+                screen.ChangeVideo("launch");
+                shaker.LaunchShake();
+                launching = true;
+            }
+
+            if (Input.GetKey(KeyCode.K))
+            {
+                screen.ChangeVideo("cancel");
+            }
+
             transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
 
             rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
             rotationY = Mathf.Clamp(rotationY, minY, maxY);
 
-            cameraTransform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            if (!launching)
+            {
+                cameraTransform.localEulerAngles = new Vector3(-rotationY, 0.0f, 0.0f);
+            }
+            else
+            {
+                cameraTransform.localEulerAngles = new Vector3(-rotationY + (Random.Range(-shakeMagnitude, shakeMagnitude)), 0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)), 
+                    0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)));
+            }
+
+
             if (body.velocity.magnitude > 0.5f && !speaker.isPlaying)
             {
-                Debug.Log("Speaker Playing");
                 speaker.Play();
             } 
             else if (body.velocity.magnitude < 0.5f && speaker.isPlaying)

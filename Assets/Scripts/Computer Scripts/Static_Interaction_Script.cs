@@ -41,7 +41,7 @@ public class Static_Interaction_Script : MonoBehaviour
                 Player.transform.rotation = interactPos.transform.rotation;
                 Camera.main.transform.localRotation = Quaternion.Euler(new Vector3(30.0f, 0, 0));
 
-                uiText.GetComponent<Text>().text = "PRESS F TO STOP INTERACTING";
+                uiText.GetComponent<Text>().text = "PRESS F TO STOP INTERACTING \n\n PRESS ENTER TO CHECK CODE";
 
                 screenController.SetActive(true);
                 if (gameObject.tag == "Binary")
