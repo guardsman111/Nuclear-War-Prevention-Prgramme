@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Binary
   - Letter
+  - KeySlot
+  - Button
   layers:
   - Default
   - TransparentFX

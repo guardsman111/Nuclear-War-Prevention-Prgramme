@@ -10,6 +10,8 @@ public class Cancel_Button_Script : MonoBehaviour
     public GameObject uiText;
     public Launch_Script screen;
 
+    private bool stopped;
+
     public void OnTriggerEnter(Collider other)
     {
         uiText.SetActive(true);
@@ -21,21 +23,19 @@ public class Cancel_Button_Script : MonoBehaviour
         uiText.SetActive(false);
     }
 
-    public void OnTriggerStay(Collider other)
+    public void CheckCancel()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (key1.CheckKeysInserted() && key2.CheckKeysInserted() && !stopped)
         {
-            if (key1.CheckKeysInserted() && key2.CheckKeysInserted())
-            {
-                uiText.GetComponent<Text>().text = "LAUNCH CANCELLED!";
-                screen.ChangeVideo("cancel");
-                Debug.Log("You stopped the launch!");
-            }
-            else
-            {
-                uiText.GetComponent<Text>().text = "UNABLE TO CANCEL LAUNCH";
-                Debug.Log("Problem with Keys");
-            }
+            uiText.GetComponent<Text>().text = "LAUNCH CANCELLED!";
+            screen.ChangeVideo("cancel");
+            Debug.Log("You stopped the launch!");
+            stopped = true;
+        }
+        else
+        {
+            uiText.GetComponent<Text>().text = "UNABLE TO CANCEL LAUNCH";
+            Debug.Log("Problem with Keys");
         }
     }
 }
