@@ -9,6 +9,7 @@ public class Launch_Script : MonoBehaviour
     public VideoPlayer launchVideo;
     public VideoPlayer cancelVideo;
     public AudioSource launchAudio;
+    public bool launched = false;
 
     public void ChangeVideo(string name)
     {
