@@ -8,6 +8,7 @@ TagManager:
   - Letter
   - KeySlot
   - Button
+  - Alarm
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,7 @@ public class Launch_Script : MonoBehaviour
             staticVideo.Pause();
             launchVideo.Play();
             launchAudio.Play();
+            print(launchAudio.isPlaying);
         }
         if (name == "cancel")
         {

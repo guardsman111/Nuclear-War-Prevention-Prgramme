@@ -15,11 +15,14 @@ public class Player_Movement : MonoBehaviour
     public Launch_Script screen;
     public Camera_Shake_Script shaker;
 
-    private bool interacting;
+    private bool interacting = false;
     private AudioSource speaker;
 
-    private bool launching = false;
+    public bool launching = false;
     public float shakeMagnitude;
+
+    [SerializeField]
+    private Timer_Script timer;
 
     private void Start()
     {
@@ -93,9 +96,7 @@ public class Player_Movement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.L))
             {
-                screen.ChangeVideo("launch");
-                shaker.LaunchShake();
-                launching = true;
+                timer.timer = 0;
             }
 
             if (Input.GetKey(KeyCode.K))

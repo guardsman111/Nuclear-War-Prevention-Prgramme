@@ -13,6 +13,7 @@ public class Static_Interaction_Script : MonoBehaviour
     public Material keyInsertedColour;
     public Player_Constants_Script playerConstants;
     public Cancel_Button_Script cancelBut;
+    public GameObject alarmLight;
 
 
     private string currentLook;
@@ -37,6 +38,12 @@ public class Static_Interaction_Script : MonoBehaviour
                 currentLookObj = hit.collider.gameObject;
             }
             if (hit.collider.tag == "Button")
+            {
+                uiText.SetActive(true);
+                currentLook = hit.collider.tag;
+                currentLookObj = hit.collider.gameObject;
+            }
+            if (hit.collider.tag == "Alarm")
             {
                 uiText.SetActive(true);
                 currentLook = hit.collider.tag;
@@ -107,6 +114,13 @@ public class Static_Interaction_Script : MonoBehaviour
                 if (currentLook == "Button")
                 {
                     cancelBut.CheckCancel();
+                }
+
+
+                if (currentLook == "Alarm")
+                {
+                    alarmLight.GetComponent<Light>().color = Color.white;
+                    alarmLight.GetComponent<Alarm_Script>().AlarmOff();
                 }
             }
         }
