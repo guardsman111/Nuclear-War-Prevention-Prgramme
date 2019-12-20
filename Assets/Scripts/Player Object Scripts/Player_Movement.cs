@@ -17,6 +17,7 @@ public class Player_Movement : MonoBehaviour
 
     private bool interacting = false;
     private AudioSource speaker;
+    private bool locked = true;
 
     public bool launching = false;
     public float shakeMagnitude;
@@ -29,104 +30,108 @@ public class Player_Movement : MonoBehaviour
         body = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.gameObject.transform;
         speaker = this.GetComponent<AudioSource>();
+        Invoke("Unlock", 10.0f);
     }
 
     void FixedUpdate()
     {
-        if (!interacting)
+        if (!locked)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (!interacting)
             {
-                if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.W))
+                {
+                    if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+                    {
+                        if (body.velocity.magnitude <= maxSpeed)
+                        {
+                            body.velocity += (transform.right * moveSpeed) + (transform.forward * moveSpeed);
+                        }
+                    }
+                    else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                    {
+                        if (body.velocity.magnitude <= maxSpeed)
+                        {
+                            body.velocity += (transform.right * -moveSpeed) + (transform.forward * moveSpeed);
+                        }
+                    }
+                    else if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += transform.forward * moveSpeed;
+                    }
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+                    {
+                        if (body.velocity.magnitude <= maxSpeed)
+                        {
+                            body.velocity += (transform.right * moveSpeed) + (transform.forward * -moveSpeed);
+                        }
+                    }
+                    else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                    {
+                        if (body.velocity.magnitude <= maxSpeed)
+                        {
+                            body.velocity += (transform.right * -moveSpeed) + (transform.forward * -moveSpeed);
+                        }
+                    }
+                    else if (body.velocity.magnitude <= maxSpeed)
+                    {
+                        body.velocity += transform.forward * -moveSpeed;
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.D))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {
-                        body.velocity += (transform.right * moveSpeed) + (transform.forward * moveSpeed);
+                        body.velocity += transform.right * moveSpeed;
                     }
                 }
-                else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+
+                if (Input.GetKey(KeyCode.A))
                 {
                     if (body.velocity.magnitude <= maxSpeed)
                     {
-                        body.velocity += (transform.right * -moveSpeed) + (transform.forward * moveSpeed);
+                        body.velocity += transform.right * -moveSpeed;
                     }
                 }
-                else if (body.velocity.magnitude <= maxSpeed)
+
+                if (Input.GetKey(KeyCode.L))
                 {
-                    body.velocity += transform.forward * moveSpeed;
+                    timer.timer = 0;
                 }
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+
+                if (Input.GetKey(KeyCode.K))
                 {
-                    if (body.velocity.magnitude <= maxSpeed)
-                    {
-                        body.velocity += (transform.right * moveSpeed) + (transform.forward * -moveSpeed);
-                    }
+                    screen.ChangeVideo("cancel");
                 }
-                else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+
+                transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
+
+                rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
+                rotationY = Mathf.Clamp(rotationY, minY, maxY);
+
+                if (!launching)
                 {
-                    if (body.velocity.magnitude <= maxSpeed)
-                    {
-                        body.velocity += (transform.right * -moveSpeed) + (transform.forward * -moveSpeed);
-                    }
+                    cameraTransform.localEulerAngles = new Vector3(-rotationY, 0.0f, 0.0f);
                 }
-                else if (body.velocity.magnitude <= maxSpeed)
+                else
                 {
-                    body.velocity += transform.forward * -moveSpeed;
+                    cameraTransform.localEulerAngles = new Vector3(-rotationY + (Random.Range(-shakeMagnitude, shakeMagnitude)), 0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)),
+                        0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)));
                 }
-            }
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                if (body.velocity.magnitude <= maxSpeed)
+
+                if (body.velocity.magnitude > 0.5f && !speaker.isPlaying)
                 {
-                    body.velocity += transform.right * moveSpeed;
+                    speaker.Play();
                 }
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                if (body.velocity.magnitude <= maxSpeed)
+                else if (body.velocity.magnitude < 0.5f && speaker.isPlaying)
                 {
-                    body.velocity += transform.right * -moveSpeed;
+                    speaker.Stop();
                 }
-            }
-
-            if (Input.GetKey(KeyCode.L))
-            {
-                timer.timer = 0;
-            }
-
-            if (Input.GetKey(KeyCode.K))
-            {
-                screen.ChangeVideo("cancel");
-            }
-
-            transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
-
-            rotationY += Input.GetAxis("Mouse Y") * rotateSpeed;
-            rotationY = Mathf.Clamp(rotationY, minY, maxY);
-
-            if (!launching)
-            {
-                cameraTransform.localEulerAngles = new Vector3(-rotationY, 0.0f, 0.0f);
-            }
-            else
-            {
-                cameraTransform.localEulerAngles = new Vector3(-rotationY + (Random.Range(-shakeMagnitude, shakeMagnitude)), 0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)), 
-                    0.0f + (Random.Range(-shakeMagnitude, shakeMagnitude)));
-            }
-
-
-            if (body.velocity.magnitude > 0.5f && !speaker.isPlaying)
-            {
-                speaker.Play();
-            } 
-            else if (body.velocity.magnitude < 0.5f && speaker.isPlaying)
-            {
-                speaker.Stop();
             }
         }
     }
@@ -139,5 +144,11 @@ public class Player_Movement : MonoBehaviour
     public bool GetInteracting()
     {
         return interacting;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
+        Destroy(GetComponentInChildren<Animator>());
     }
 }
