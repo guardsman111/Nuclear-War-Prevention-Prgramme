@@ -49,6 +49,13 @@ public class Static_Interaction_Script : MonoBehaviour
                 currentLook = hit.collider.tag;
                 currentLookObj = hit.collider.gameObject;
             }
+            if (hit.collider.tag == "Untagged")
+            {
+                uiText.SetActive(false);
+                currentLook = hit.collider.tag;
+                currentLookObj = hit.collider.gameObject;
+                uiText.GetComponent<Text>().text = "PRESS F TO INTERACT";
+            }
         }
         else
         {
@@ -121,6 +128,11 @@ public class Static_Interaction_Script : MonoBehaviour
                 {
                     alarmLight.GetComponent<Light>().color = Color.white;
                     alarmLight.GetComponent<Alarm_Script>().AlarmOff();
+                }
+
+                if (currentLook == "Untagged")
+                {
+                    uiText.GetComponent<Text>().text = "PRESS F TO INTERACT";
                 }
             }
         }
